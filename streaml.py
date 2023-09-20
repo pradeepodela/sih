@@ -6,6 +6,7 @@ from datetime import datetime
 import streamlit as st
 import tempfile
 import time
+from weappon import *
 # Create tracker object
 
 
@@ -90,6 +91,7 @@ accused_detection = st.sidebar.checkbox(
     'Accused detection detecation', value=True)
 # helemet_detecation = st.sidebar.checkbox('Helemet detection ', value=True)
 object_det = st.sidebar.checkbox('object detection and tracking', value=True)
+weapon_detection = st.sidebar.checkbox('weapon detection', value=True)
 if object_det:
     confidence = st.sidebar.slider(
         'confidence', min_value=0.0, max_value=1.0, value=0.7)
@@ -130,10 +132,10 @@ if Start:
 
         ret, frame = cap.read()
         current_time = get_current_time()
-        
 
-        
 
+        if weapon_detection:
+             frame=detect_weappon(frame)
 
             # frame = cv2.resize(frame, frame_size)  # resizing image
         orifinal_frame = frame.copy()
