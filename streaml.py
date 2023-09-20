@@ -7,6 +7,7 @@ import streamlit as st
 import tempfile
 import time
 from weappon import *
+from facial_recognition import *
 # Create tracker object
 
 
@@ -108,6 +109,7 @@ Start = st.sidebar.button('Start')
 stop = st.sidebar.button('Stop')
 if stop:
     Start = False
+    cap.release()
     print(Start)
 
 
@@ -136,6 +138,9 @@ if Start:
 
         if weapon_detection:
              frame=detect_weappon(frame)
+
+        if accused_detection:
+            frame = fcr(frame)
 
             # frame = cv2.resize(frame, frame_size)  # resizing image
         orifinal_frame = frame.copy()
